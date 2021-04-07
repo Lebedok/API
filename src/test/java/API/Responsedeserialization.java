@@ -78,35 +78,7 @@ public class Responsedeserialization {
         Assert.assertEquals("Illinois",responseMap.get("state"));
         Assert.assertEquals(12671821, responseMap.get("population"));
     }
-    @Test
-    public void responseDeserialization3() throws URISyntaxException, IOException {
-        HttpClient client = HttpClientBuilder.create().build();
-        URIBuilder uriBuilder = new URIBuilder();
-        uriBuilder.setScheme("http");
-        uriBuilder.setHost("swapi.dev");
-        uriBuilder.setPath("api/people");
-
-        HttpGet httpGet = new HttpGet(uriBuilder.build());
-        httpGet.setHeader("Accept", "application/json");
-
-        // get executer request
-        HttpResponse response = client.execute(httpGet);
-        Assert.assertEquals(HttpStatus.SC_OK,response.getStatusLine().getStatusCode());
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> parsedResponse = objectMapper.readValue(response.getEntity().getContent(),
-                new TypeReference<Map<String, Object>>() {});
-
-        //Explicitly casted
-        List<Map<String,Object>> resultList = (List<Map<String, Object>>) parsedResponse.get("results");
-
-        //System.out.println(resultList);
-
-        Map<String, Object> map0 = resultList.get(0);
-        Assert.assertEquals("Luke Skywalker", map0.get("name"));
-
-    }
-
+    
 }
 
 
